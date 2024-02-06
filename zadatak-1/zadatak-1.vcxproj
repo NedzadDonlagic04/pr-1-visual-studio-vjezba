@@ -130,9 +130,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\problem_description.PNG">
-      <DeploymentContent>true</DeploymentContent>
-    </Image>
+    <Image Include="problem_description.PNG" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
