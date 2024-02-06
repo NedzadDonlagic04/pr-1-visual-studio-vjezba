@@ -190,7 +190,7 @@ char* combineAllTextsIntoOne(const char* const* const texts, const std::size_t t
 	// IE if we have 3 sentences "foo" "bar" "foobar", for them this function would return 12 and for the extra characters we add 3 more which totals up to 15
 	// so when we add them we get foo;bar;foobar\0 which counts up to 15
 
-	char* combinedTexts{ new char[combinedTextsSize] {} };
+	char* const combinedTexts{ new char[combinedTextsSize] {} };
 	// This should be a std::unique_ptr but due to not knowing would the prof allow it we'll keep it raw for now
 
 	for (std::size_t i = 0; i < textCount; i++) {
