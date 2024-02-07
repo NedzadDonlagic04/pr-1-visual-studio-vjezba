@@ -4,6 +4,7 @@
 #include<optional>
 #include<cstring>
 #include<limits>
+#include<numeric>
 #include<memory>
 
 constexpr std::size_t BUFFER_SIZE{ 256 };
@@ -55,6 +56,8 @@ struct Book {
 	void generateBookData();
 	
 	void ispis() const;
+
+	[[nodiscard]] float getAverageBookGrades() const;
 };
 
 void clearBuffer();
@@ -66,7 +69,7 @@ void enterText(char*, const std::size_t, const char* const);
 void enterNum(int&, const char* const, const std::optional<int> = std::nullopt, const std::optional<int> = std::nullopt);
 
 [[nodiscard]] unsigned int countWordsInText(const char* const);
-[[nodiscard]] std::size_t getIndexForBiggestNum(const int* const, const std::size_t);
+[[nodiscard]] const Book* getBestBookByAverageGrade(const Book*, const std::size_t);
 
 int main() {
 	std::size_t bookSize{};
@@ -96,6 +99,13 @@ int main() {
 		(books.get() + i)->ispis();
 		printBreakLine();
 	}
+
+	const Book* bestBookByGrades{ getBestBookByAverageGrade(books.get(), bookSize)};
+
+	printBreakLine();
+	std::cout << "Knjiga sa najboljim prosjekom ocjena\n";
+	bestBookByGrades->ispis();
+	printBreakLine();
 
 	return 0;
 }
@@ -180,16 +190,12 @@ void Book::ispis() const {
 		}
 	}
 	std::cout << std::endl;
+}
 
-	const unsigned int bookNameWordCount{ countWordsInText(this->imeKnjige) };
+float Book::getAverageBookGrades() const {
+	const float sum{ std::accumulate(this->ocjena, this->ocjena + this->brojOcjena, 0.0f) };
 
-	std::cout << "Ime knjige ima " << bookNameWordCount << " rijec";
-	if (bookNameWordCount != 1) {
-		std::cout << 'i';
-	}
-	std::cout << std::endl;
-
-	std::cout << "Index najbolje ocjene za knjigu je index " << getIndexForBiggestNum(this->ocjena, this->brojOcjena) << std::endl;
+	return sum / this->brojOcjena;
 }
 
 void clearBuffer() {
@@ -290,14 +296,14 @@ unsigned int countWordsInText(const char* const text) {
 	return counter;
 }
 
-std::size_t getIndexForBiggestNum(const int * const arr, const std::size_t size) {
-	std::size_t biggestNumIndex{ 0 };
+const Book* getBestBookByAverageGrade(const Book* books, const std::size_t size) {
+	std::size_t bestBookIndex{ 0 };
 
 	for (std::size_t i = 1; i < size; i++) {
-		if (*(arr + i) > *(arr + biggestNumIndex)) {
-			biggestNumIndex = i;
+		if ((books + i)->getAverageBookGrades() > (books + bestBookIndex)->getAverageBookGrades()) {
+			bestBookIndex = i;
 		}
 	}
 
-	return biggestNumIndex;
+	return books + bestBookIndex;
 }
