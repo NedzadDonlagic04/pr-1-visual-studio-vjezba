@@ -278,6 +278,9 @@ void enterNum(int& num, const char* const outputMsg, const std::optional<int> mi
 			repeatLoop = true;
 		}
 	} while (repeatLoop);
+
+	// To eat the '\n'
+	clearBuffer();
 }
 
 void enterText(char* const text, const std::size_t bufferSize, const char* const outputMsg) {

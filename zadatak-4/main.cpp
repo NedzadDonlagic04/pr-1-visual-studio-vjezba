@@ -76,6 +76,9 @@ void enterNum(int& num, const char* const outputMsg) {
 		std::cout << outputMsg;
 		std::cin >> num;
 	} while (std::cin.fail());
+
+	// To eat the '\n'
+	clearBuffer();
 }
 
 void enterArray(int* const arr, const std::size_t size, const std::size_t i) {
