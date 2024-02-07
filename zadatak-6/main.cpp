@@ -4,7 +4,6 @@
 #include<optional>
 #include<cstring>
 #include<limits>
-#include<span>
 #include<memory>
 
 constexpr std::size_t BUFFER_SIZE{ 256 };
