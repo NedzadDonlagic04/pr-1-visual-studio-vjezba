@@ -64,6 +64,9 @@ void enterArraySize(std::size_t& size, const char* const outputMsg) {
 			repeatLoop = true;
 		}
 	} while (repeatLoop);
+
+	// To eat the '\n'
+	clearBuffer();
 }
 
 void enterNum(int& num, const char* const outputMsg) {
