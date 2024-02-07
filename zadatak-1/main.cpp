@@ -160,17 +160,17 @@ void capitalizeInAllTextsWords(char* const* const texts, const std::size_t textC
 int countOccurences(char* text, char* word) {
 	int counter{ 0 };
 
-	char* whatsLeftOfText{ nullptr };
-	char* token{ strtok_s(text, " ", &whatsLeftOfText)};
-	
-	while (token) {
-		if (std::strstr(token, word)) {
-			counter++;
-		}
-
-		token = strtok_s(nullptr, word, &whatsLeftOfText);
+	if (!std::strlen(word)) {
+		return counter;
 	}
-		
+
+	char* found{ std::strstr(text, word) };
+
+	while (found != nullptr) {
+		counter++;
+		found = std::strstr(found + 1, word);
+	}
+
 	return counter;
 }
 
