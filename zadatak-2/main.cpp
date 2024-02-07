@@ -26,8 +26,8 @@ struct Fudbaler {
 	void generateTestData();
 	// added [[nodiscard]] because if we allow someone to discard this value
 	// then the dynamic memory would allow a memory leak
-	[[nodiscard]] float* getAveragesByGame();
-	void ispis();
+	[[nodiscard]] float* getAveragesByGame() const;
+	void ispis() const;
 
 	void alokacija();
 	void dealokacija();
@@ -164,7 +164,7 @@ void Fudbaler::generateTestData() {
 	}
 }
 
-float* Fudbaler::getAveragesByGame() {
+float* Fudbaler::getAveragesByGame() const {
 	float* const averagesByGames{ new float[this->brojUtakmica] {0.0f} };
 
 	for (std::size_t i = 0; i < this->brojUtakmica; i++) {
@@ -178,7 +178,7 @@ float* Fudbaler::getAveragesByGame() {
 	return averagesByGames;
 }
 
-void Fudbaler::ispis() {
+void Fudbaler::ispis() const {
 	std::cout << "Ime fudbalera: " << std::quoted(this->ime) << std::endl;
 	std::cout << "Prezime fudbalera: " << std::quoted(this->prezime) << std::endl;
 	std::cout << "Drzava fudbalera: " << std::quoted(this->drzava) << std::endl;
