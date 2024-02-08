@@ -160,7 +160,8 @@ void capitalizeInAllTextsWords(char* const* const texts, const std::size_t textC
 int countOccurences(char* text, char* word) {
 	int counter{ 0 };
 
-	if (!std::strlen(word)) {
+	// This is better in cases where the string isn't empty
+	if (word[0] == '\0') {
 		return counter;
 	}
 
