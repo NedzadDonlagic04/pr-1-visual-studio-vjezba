@@ -15,7 +15,7 @@ int main() {
 		card3 = cardDrawDist(rng);
 
 		counter++;
-	} while (card1 + 5 != card2 || card2 + 5 != card3);
+	} while (std::abs(card1 - card2) != 5 || std::abs(card2 - card3) != 5);
 
 	std::cout << "Ukupno pokusaja: " << counter << std::endl;
 	std::cout << "Krajnja kombinacija: " << card1 << ' ' << card2 << ' ' << card3 << std::endl;
