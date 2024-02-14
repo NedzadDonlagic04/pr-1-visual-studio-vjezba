@@ -16,17 +16,52 @@ void enterSize(std::size_t &, const char* const);
 void allocateTexts(char**&, const std::size_t, const std::size_t);
 void deallocateTexts(char**&, const std::size_t);
 
+[[nodiscard]] std::size_t countWordsInText(const char* const);
+
+struct WordCounter {
+	const char* word{};
+	std::size_t counter{};
+
+	WordCounter();
+	~WordCounter();
+
+	void setWord(const char*, const std::size_t);
+	void incrementCounter(const std::size_t = 1);
+	
+	[[nodiscard]] const char* getWord() const;
+	[[nodiscard]] std::size_t getCounter() const;
+};
+
+void splitWordsIntoWordCounter(char *, WordCounter * const, const std::size_t);
+
 int main() {
 	std::size_t textsCount{};
 
 	enterSize(textsCount, "Unesi broj tekstova: ");
 	
 	char** texts{};
+	auto textToCountWords{ std::make_unique<char[]>(BUFFER_SIZE) };
+	auto tempTextToCountWords{ std::make_unique<char[]>(BUFFER_SIZE) };
 
 	allocateTexts(texts, textsCount, BUFFER_SIZE);
 
 	enterTexts(texts, textsCount, BUFFER_SIZE, "\nUnesi tekstove\n");
 	printTexts(texts, textsCount, "\nIspis tekstova\n");
+
+	enterText(textToCountWords.get(), BUFFER_SIZE, "Unesi recenicu cije ce se rijeci brojati u drugim recenicama: ");
+
+	const std::size_t wordCountersSize{ countWordsInText(textToCountWords.get()) };
+	auto wordCounters{ std::make_unique<WordCounter[]>(wordCountersSize) };
+	
+	// Making this copy in temp because I'll use strtok on the temp
+	// and keep the original so I can use it later
+	strcpy_s(tempTextToCountWords.get(), BUFFER_SIZE, textToCountWords.get());
+
+	splitWordsIntoWordCounter(tempTextToCountWords.get(), wordCounters.get(), wordCountersSize);
+
+	for (std::size_t i = 0; i < wordCountersSize; i++) {
+		std::cout << "Word " << i + 1 << ": " << std::quoted(wordCounters[i].getWord()) << std::endl;
+	}
 
 	deallocateTexts(texts, textsCount);
 
@@ -111,4 +146,61 @@ void deallocateTexts(char**& texts, const std::size_t textsCount) {
 	}
 	delete[] texts;
 	texts = nullptr;
+}
+
+std::size_t countWordsInText(const char* const text) {
+	std::size_t wordCount{ 0 };
+
+	if (!std::isspace(text[0])) {
+		wordCount++;
+	}
+
+	for (std::size_t i = 1; i < std::strlen(text); i++) {
+		if (std::isspace(text[i - 1]) && !std::isspace(text[i])) {
+			wordCount++;
+		}
+	}
+
+	return wordCount;
+}
+
+WordCounter::WordCounter() : word(nullptr), counter(0) {}
+
+WordCounter::~WordCounter() {
+	delete[] word;
+}
+
+void WordCounter::setWord(const char* word, const std::size_t maxWordLength) {
+	char* temp{ new char[maxWordLength] };
+	strcpy_s(temp, maxWordLength, word);
+	this->word = temp;
+
+	// When a word is set the counter is reset to 0
+	this->counter = 0;
+}
+
+void WordCounter::incrementCounter(const std::size_t incrementVal) {
+	this->counter += incrementVal;
+}
+
+const char* WordCounter::getWord() const {
+	return this->word;
+}
+
+std::size_t WordCounter::getCounter() const {
+	return this->counter;
+}
+
+void splitWordsIntoWordCounter(char* text, WordCounter* const wordCounters, const std::size_t wordCountersSize) {
+	const std::size_t maxWordLength(std::strlen(text) + 1);
+	std::size_t wordCounterIt{ 0 };
+
+	char* context{ nullptr };
+	char* tok = strtok_s(text, " ", &context);
+	
+	while (tok) {
+		wordCounters[wordCounterIt].setWord(tok, maxWordLength);
+		wordCounterIt++;
+		tok = strtok_s(nullptr, " ", &context);
+	}
 }
