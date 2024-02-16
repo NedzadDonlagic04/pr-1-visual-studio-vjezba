@@ -179,7 +179,7 @@ void WordCounter::setWord(const char* word, const std::size_t wordLength) {
 		delete[] this->word;
 	}
 
-	char* temp{ new char[wordLength] };
+	char* temp{ new char[wordLength] {} };
 	strcpy_s(temp, wordLength, word);
 	this->word = temp;
 
