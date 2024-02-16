@@ -65,6 +65,7 @@ int main() {
 	splitWordsIntoWordCounter(textToCountWords.get(), wordCounters.get(), wordCountersSize);
 	countWordsInTexts(texts, textsCount, wordCounters.get(), wordCountersSize);
 
+	std::cout << std::endl;
 	printWordCounterValues({ wordCounters.get(), wordCountersSize }, longestWordSize);
 
 	deallocateTexts(texts, textsCount);
