@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zadatak-7", "zadatak-7\zada
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tetris", "tetris\tetris.vcxproj", "{0352EEE3-D2D1-4465-8159-BAA69DFDB353}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zadatak-8", "zadatak-8\zadatak-8.vcxproj", "{9BDA2DFD-D62B-4D09-AE05-C74849A79CFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,14 @@ Global
 		{0352EEE3-D2D1-4465-8159-BAA69DFDB353}.Release|x64.Build.0 = Release|x64
 		{0352EEE3-D2D1-4465-8159-BAA69DFDB353}.Release|x86.ActiveCfg = Release|Win32
 		{0352EEE3-D2D1-4465-8159-BAA69DFDB353}.Release|x86.Build.0 = Release|Win32
+		{9BDA2DFD-D62B-4D09-AE05-C74849A79CFD}.Debug|x64.ActiveCfg = Debug|x64
+		{9BDA2DFD-D62B-4D09-AE05-C74849A79CFD}.Debug|x64.Build.0 = Debug|x64
+		{9BDA2DFD-D62B-4D09-AE05-C74849A79CFD}.Debug|x86.ActiveCfg = Debug|Win32
+		{9BDA2DFD-D62B-4D09-AE05-C74849A79CFD}.Debug|x86.Build.0 = Debug|Win32
+		{9BDA2DFD-D62B-4D09-AE05-C74849A79CFD}.Release|x64.ActiveCfg = Release|x64
+		{9BDA2DFD-D62B-4D09-AE05-C74849A79CFD}.Release|x64.Build.0 = Release|x64
+		{9BDA2DFD-D62B-4D09-AE05-C74849A79CFD}.Release|x86.ActiveCfg = Release|Win32
+		{9BDA2DFD-D62B-4D09-AE05-C74849A79CFD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
