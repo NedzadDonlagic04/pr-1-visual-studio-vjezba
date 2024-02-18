@@ -23,9 +23,9 @@ namespace arr {
 namespace example1 {
     /*
         Saw this implementation for this algorithm here
-        Here I just wrote it myself in an attempt to better understand it
         https://en.cppreference.com/w/cpp/algorithm/rotate
         https://github.com/gcc-mirror/gcc/blob/14d8a5ae472ca5743016f37da2dd4770d83dea21/libstdc%2B%2B-v3/include/bits/stl_algo.h#L1213-L1416
+        I just wrote it myself in an attempt to better understand it
     */
     void leftShiftArray(int(&arr)[arr::ARR_SIZE], std::size_t totalShifts) {
         if (totalShifts == 0 || totalShifts >= std::size(arr)) {
