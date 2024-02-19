@@ -198,5 +198,5 @@ unsigned int getDigitWidth(const int num) {
 
 	bool isNeg{ num < 0 };
 
-	return std::log10(std::abs(num)) + 1 + isNeg;
+	return static_cast<unsigned int>(std::log10(std::abs(num))) + 1 + isNeg;
 }
