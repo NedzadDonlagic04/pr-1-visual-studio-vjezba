@@ -56,12 +56,13 @@ void printErrorMsg(const char* const errorMsg) {
 
 bool isStringValidInt(const char* const text) {
 	std::size_t i{ 0 };
+	const std::size_t textSize{ std::strlen(text) };
 
-	if (text[i] == '-') {
+	if (text[i] == '-' && textSize > 1) {
 		i++;
 	}
 
-	for (; i < std::strlen(text); i++) {
+	for (; i < textSize; i++) {
 		if (!std::isdigit(text[i])) {
 			return false;
 		}
