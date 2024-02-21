@@ -123,7 +123,7 @@ double aritmeticAverageOfArr(const int* const arr, const std::size_t size, const
 
 double geometricAverageOfArr(const int* const arr, const std::size_t size, const std::size_t i) {
 	if (i == size) {
-		return 1.0f;
+		return 1.0;
 	}
 
 	return std::pow(arr[i], 1.0 / size) * geometricAverageOfArr(arr, size, i + 1);
